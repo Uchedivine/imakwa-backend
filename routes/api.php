@@ -34,11 +34,11 @@ Route::prefix('worldcup')->group(function () {
 
 // Cart
 Route::prefix('cart')->group(function () {
-    Route::get('/',           [App\Http\Controllers\Api\CartController::class, 'index']);
-    Route::post('/add',       [App\Http\Controllers\Api\CartController::class, 'add']);
-    Route::delete('/{itemId}',[App\Http\Controllers\Api\CartController::class, 'remove']);
-    Route::delete('/',        [App\Http\Controllers\Api\CartController::class, 'clear']);
-    Route::post('/merge',     [App\Http\Controllers\Api\CartController::class, 'merge']);
+    Route::get('/',                [App\Http\Controllers\Api\CartController::class, 'index']);
+    Route::post('/items',          [App\Http\Controllers\Api\CartController::class, 'add']);
+    Route::delete('/items/{itemId}', [App\Http\Controllers\Api\CartController::class, 'remove']);
+    Route::delete('/',             [App\Http\Controllers\Api\CartController::class, 'clear']);
+    Route::post('/merge',          [App\Http\Controllers\Api\CartController::class, 'merge']);
 });
 
 // Favorites (auth required)
