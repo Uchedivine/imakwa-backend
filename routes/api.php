@@ -34,11 +34,11 @@ Route::prefix('worldcup')->group(function () {
 
 // Cart
 Route::prefix('cart')->group(function () {
-    Route::get('/',           [App\Http\Controllers\Api\CartController::class, 'index']);
-    Route::post('/add',       [App\Http\Controllers\Api\CartController::class, 'add']);
-    Route::delete('/{itemId}',[App\Http\Controllers\Api\CartController::class, 'remove']);
-    Route::delete('/',        [App\Http\Controllers\Api\CartController::class, 'clear']);
-    Route::post('/merge',     [App\Http\Controllers\Api\CartController::class, 'merge']);
+    Route::get('/',                [App\Http\Controllers\Api\CartController::class, 'index']);
+    Route::post('/items',          [App\Http\Controllers\Api\CartController::class, 'add']);
+    Route::delete('/items/{itemId}', [App\Http\Controllers\Api\CartController::class, 'remove']);
+    Route::delete('/',             [App\Http\Controllers\Api\CartController::class, 'clear']);
+    Route::post('/merge',          [App\Http\Controllers\Api\CartController::class, 'merge']);
 });
 
 // Favorites (auth required)
@@ -53,6 +53,13 @@ Route::middleware('auth:sanctum')->prefix('orders')->group(function () {
     Route::get('/',      [App\Http\Controllers\Api\OrderController::class, 'index']);
     Route::post('/',     [App\Http\Controllers\Api\OrderController::class, 'store']);
     Route::get('/{id}',  [App\Http\Controllers\Api\OrderController::class, 'show']);
+});
+
+// Payments (auth required)
+Route::middleware('auth:sanctum')->prefix('payments')->group(function () {
+    Route::post('/stripe/intent',       [App\Http\Controllers\Api\PaymentController::class, 'stripeIntent']);
+    Route::post('/paystack/init',       [App\Http\Controllers\Api\PaymentController::class, 'paystackInit']);
+    Route::get('/paystack/callback',    [App\Http\Controllers\Api\PaymentController::class, 'paystackCallback']);
 });
 
 // World Cup Checkout
