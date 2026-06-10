@@ -55,6 +55,13 @@ Route::middleware('auth:sanctum')->prefix('orders')->group(function () {
     Route::get('/{id}',  [App\Http\Controllers\Api\OrderController::class, 'show']);
 });
 
+// Payments (auth required)
+Route::middleware('auth:sanctum')->prefix('payments')->group(function () {
+    Route::post('/stripe/intent',       [App\Http\Controllers\Api\PaymentController::class, 'stripeIntent']);
+    Route::post('/paystack/init',       [App\Http\Controllers\Api\PaymentController::class, 'paystackInit']);
+    Route::get('/paystack/callback',    [App\Http\Controllers\Api\PaymentController::class, 'paystackCallback']);
+});
+
 // World Cup Checkout
 Route::prefix('worldcup')->group(function () {
     Route::post('/checkout',           [App\Http\Controllers\Api\WorldCupOrderController::class, 'store']);
