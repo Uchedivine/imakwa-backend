@@ -10,6 +10,7 @@ class Order extends Model {
         'payment_reference','payment_status','subtotal','shipping_cost','total',
         'currency','shipping_name','shipping_email','shipping_phone',
         'shipping_address','shipping_city','shipping_country','shipping_postal_code',
+        'payment_intent_id','paystack_reference',
     ];
 
     protected static function boot() {
