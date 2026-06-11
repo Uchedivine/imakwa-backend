@@ -6,6 +6,7 @@ use App\Models\Artwork;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -29,11 +30,27 @@ class ArtworkResource extends Resource
             Select::make('artist_id')->relationship('artist', 'display_name')->required(),
             TextInput::make('title')->required(),
             Textarea::make('description')->columnSpanFull(),
-            TextInput::make('image_urls')
-                ->label('Artwork Image URLs')
-                ->placeholder('Paste image URLs separated by commas')
-                ->helperText('Upload to Imgur.com first, then paste URLs here separated by commas')
-                ->columnSpanFull(),
+            
+            Repeater::make('images')
+                ->relationship('images')
+                ->schema([
+                    TextInput::make('url')
+                        ->label('Image URL')
+                        ->required()
+                        ->url()
+                        ->placeholder('https://i.imgur.com/xxxxx.jpg')
+                        ->helperText('Paste direct Imgur image URL (starts with i.imgur.com)'),
+                    Toggle::make('is_primary')
+                        ->label('Set as Primary Image')
+                        ->default(false),
+                ])
+                ->orderColumn('sort_order')
+                ->defaultItems(1)
+                ->maxItems(10)
+                ->collapsible()
+                ->columnSpanFull()
+                ->helperText('Add up to 10 images. Mark one as primary.'),
+            
             TextInput::make('medium'),
             TextInput::make('dimensions'),
             TextInput::make('year')->numeric(),
