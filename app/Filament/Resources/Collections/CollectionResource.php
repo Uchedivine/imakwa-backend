@@ -28,10 +28,9 @@ class CollectionResource extends Resource
             Select::make('artist_id')->relationship('artist', 'display_name')->required(),
             TextInput::make('name')->required(),
             Textarea::make('description')->columnSpanFull(),
-            FileUpload::make('cover_image')
-                ->image()
-                ->disk('public')
-                ->directory('collections')
+            TextInput::make('cover_image')
+                ->label('Cover Image URL')
+                ->placeholder('Paste image URL here')
                 ->columnSpanFull(),
             Toggle::make('is_active')->default(true),
         ]);

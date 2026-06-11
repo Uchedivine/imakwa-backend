@@ -29,15 +29,10 @@ class ArtworkResource extends Resource
             Select::make('artist_id')->relationship('artist', 'display_name')->required(),
             TextInput::make('title')->required(),
             Textarea::make('description')->columnSpanFull(),
-            FileUpload::make('images')
-                ->label('Artwork Images')
-                ->image()
-                ->multiple()
-                ->disk('public')
-                ->directory('artworks')
-                ->maxFiles(10)
-                ->reorderable()
-                ->helperText('Upload multiple images. Drag to reorder.')
+            TextInput::make('image_urls')
+                ->label('Artwork Image URLs')
+                ->placeholder('Paste image URLs separated by commas')
+                ->helperText('Upload to Imgur.com first, then paste URLs here separated by commas')
                 ->columnSpanFull(),
             TextInput::make('medium'),
             TextInput::make('dimensions'),

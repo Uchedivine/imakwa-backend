@@ -37,13 +37,10 @@ class DigitalProductTierResource extends Resource
             ])->required(),
             TextInput::make('label')->required(),
             Textarea::make('description')->columnSpanFull(),
-            FileUpload::make('file_path')
-                ->label('Digital File')
-                ->acceptedFileTypes(['application/pdf', 'application/zip', 'application/x-zip-compressed'])
-                ->disk('public')
-                ->directory('worldcup-files')
-                ->maxSize(102400) // 100MB
-                ->helperText('Upload PDF or ZIP file (max 100MB)')
+            TextInput::make('file_path')
+                ->label('Digital File URL')
+                ->placeholder('Upload file to cloud storage and paste URL here')
+                ->helperText('Upload PDF/ZIP to Google Drive, Dropbox, or similar')
                 ->columnSpanFull(),
             TextInput::make('price')->numeric()->required(),
             TextInput::make('currency')->default('USD'),

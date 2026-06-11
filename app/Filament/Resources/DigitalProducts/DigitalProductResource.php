@@ -49,11 +49,9 @@ class DigitalProductResource extends Resource
                 ->label('Description')
                 ->columnSpanFull(),
             
-            FileUpload::make('cover_image')
-                ->image()
-                ->disk('public')
-                ->directory('worldcup-products')
-                ->label('Cover Image')
+            TextInput::make('cover_image')
+                ->label('Cover Image URL')
+                ->placeholder('Paste image URL here')
                 ->columnSpanFull(),
             
             DateTimePicker::make('closes_at')

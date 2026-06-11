@@ -30,10 +30,10 @@ class ArtistResource extends Resource
             TextInput::make('country')->required(),
             TextInput::make('region'),
             Textarea::make('bio')->columnSpanFull(),
-            FileUpload::make('profile_image')
-                ->image()
-                ->disk('public')
-                ->directory('artists')
+            TextInput::make('profile_image')
+                ->label('Profile Image URL')
+                ->placeholder('Paste image URL here (e.g., from Imgur, Cloudinary)')
+                ->helperText('Upload your image to a service like Imgur.com or use a direct image URL')
                 ->columnSpanFull(),
             TextInput::make('instagram'),
             TextInput::make('website'),
