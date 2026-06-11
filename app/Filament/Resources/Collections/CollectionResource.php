@@ -5,6 +5,7 @@ use App\Filament\Resources\Collections\Pages;
 use App\Models\Collection;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -26,8 +27,11 @@ class CollectionResource extends Resource
         return $form->components([
             Select::make('artist_id')->relationship('artist', 'display_name')->required(),
             TextInput::make('name')->required(),
-            Textarea::make('description'),
-            TextInput::make('cover_image'),
+            Textarea::make('description')->columnSpanFull(),
+            FileUpload::make('cover_image')
+                ->image()
+                ->directory('collections')
+                ->columnSpanFull(),
             Toggle::make('is_active')->default(true),
         ]);
     }

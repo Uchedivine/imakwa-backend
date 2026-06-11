@@ -5,6 +5,7 @@ use App\Filament\Resources\DigitalProducts\Pages;
 use App\Models\DigitalProduct;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -45,13 +46,14 @@ class DigitalProductResource extends Resource
             Textarea::make('description')
                 ->rows(3)
                 ->maxLength(1000)
-                ->label('Description'),
+                ->label('Description')
+                ->columnSpanFull(),
             
-            TextInput::make('cover_image')
-                ->url()
-                ->maxLength(255)
-                ->label('Cover Image URL')
-                ->placeholder('https://...'),
+            FileUpload::make('cover_image')
+                ->image()
+                ->directory('worldcup-products')
+                ->label('Cover Image')
+                ->columnSpanFull(),
             
             DateTimePicker::make('closes_at')
                 ->label('Store Closes At')

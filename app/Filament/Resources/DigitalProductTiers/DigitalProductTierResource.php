@@ -5,6 +5,7 @@ use App\Filament\Resources\DigitalProductTiers\Pages;
 use App\Models\DigitalProductTier;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -35,7 +36,14 @@ class DigitalProductTierResource extends Resource
                 'IV'  => 'Tier IV',
             ])->required(),
             TextInput::make('label')->required(),
-            Textarea::make('description'),
+            Textarea::make('description')->columnSpanFull(),
+            FileUpload::make('file_path')
+                ->label('Digital File')
+                ->acceptedFileTypes(['application/pdf', 'application/zip', 'application/x-zip-compressed'])
+                ->directory('worldcup-files')
+                ->maxSize(102400) // 100MB
+                ->helperText('Upload PDF or ZIP file (max 100MB)')
+                ->columnSpanFull(),
             TextInput::make('price')->numeric()->required(),
             TextInput::make('currency')->default('USD'),
             TextInput::make('license_count')->numeric()->required()->label('Total Licenses'),

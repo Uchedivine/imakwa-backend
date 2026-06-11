@@ -5,6 +5,7 @@ use App\Filament\Resources\Artists\Pages;
 use App\Models\Artist;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -28,8 +29,11 @@ class ArtistResource extends Resource
             TextInput::make('display_name')->required(),
             TextInput::make('country')->required(),
             TextInput::make('region'),
-            Textarea::make('bio'),
-            TextInput::make('profile_image'),
+            Textarea::make('bio')->columnSpanFull(),
+            FileUpload::make('profile_image')
+                ->image()
+                ->directory('artists')
+                ->columnSpanFull(),
             TextInput::make('instagram'),
             TextInput::make('website'),
             Toggle::make('is_verified'),

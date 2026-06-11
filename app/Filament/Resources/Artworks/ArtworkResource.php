@@ -5,6 +5,7 @@ use App\Filament\Resources\Artworks\Pages;
 use App\Models\Artwork;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -27,7 +28,16 @@ class ArtworkResource extends Resource
         return $form->components([
             Select::make('artist_id')->relationship('artist', 'display_name')->required(),
             TextInput::make('title')->required(),
-            Textarea::make('description'),
+            Textarea::make('description')->columnSpanFull(),
+            FileUpload::make('images')
+                ->label('Artwork Images')
+                ->image()
+                ->multiple()
+                ->directory('artworks')
+                ->maxFiles(10)
+                ->reorderable()
+                ->helperText('Upload multiple images. Drag to reorder.')
+                ->columnSpanFull(),
             TextInput::make('medium'),
             TextInput::make('dimensions'),
             TextInput::make('year')->numeric(),
