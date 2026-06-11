@@ -35,5 +35,3 @@ Route::get('/setup-admin-urgent', function () {
         ], 500);
     }
 });
-
-require __DIR__.'/auth.php';
