@@ -13,6 +13,9 @@ nixPkgs = [
   "php82Extensions.gd",
   "php82Extensions.intl"
 ]
+cmds = [
+  "curl -sS https://getcomposer.org/installer | php82 -- --install-dir=/usr/local/bin --filename=composer"
+]
 
 [phases.install]
 cmds = ["composer install --no-dev --optimize-autoloader --no-interaction"]
