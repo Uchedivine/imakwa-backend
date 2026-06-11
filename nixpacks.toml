@@ -25,7 +25,8 @@ cmds = [
   "php artisan config:cache",
   "php artisan route:cache",
   "php artisan view:cache",
-  "php artisan filament:assets"
+  "php artisan filament:assets",
+  "php artisan livewire:publish --assets"
 ]
 
 [start]
