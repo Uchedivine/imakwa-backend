@@ -18,12 +18,9 @@ return [
     |
     */
 
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
-        '%s,%s%s',
-        'localhost,localhost:3000,localhost:5173,127.0.0.1,127.0.0.1:8000,::1,imakwa.com,www.imakwa.com,api.imakwa.com,admin.imakwa.com',
-        Sanctum::currentApplicationUrlWithPort(),
-        // Sanctum::currentRequestHost(),
-    ))),
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 
+        'localhost,localhost:3000,localhost:5173,127.0.0.1,127.0.0.1:8000,::1,imakwa.com,www.imakwa.com,api.imakwa.com,admin.imakwa.com'
+    )),
 
     /*
     |--------------------------------------------------------------------------
