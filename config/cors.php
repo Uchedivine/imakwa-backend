@@ -19,13 +19,20 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', implode(',', [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        'https://imakwa.com',
+        'https://www.imakwa.com',
+        'https://api.imakwa.com',
+        'https://admin.imakwa.com',
+    ]))),
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => ['X-Session-ID'],
+    'exposed_headers' => [],
 
     'max_age' => 0,
 
