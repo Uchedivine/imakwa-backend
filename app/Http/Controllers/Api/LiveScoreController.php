@@ -62,7 +62,7 @@ class LiveScoreController extends Controller
         $this->incrementTotalRequests('live_scores');
         
         return Cache::remember('worldcup_live_scores', $ttl, function () {
-            $useMock = (bool) Cache::get('worldcup_use_mock', true);
+            $useMock = (bool) Cache::get('worldcup_use_mock', config('worldcup.use_mock', true));
             
             if ($useMock) {
                 return response()->json($this->getMockScores());
@@ -86,7 +86,7 @@ class LiveScoreController extends Controller
         
         return response()->json([
             'status' => 'ok',
-            'using_mock' => (bool) Cache::get('worldcup_use_mock', true),
+            'using_mock' => (bool) Cache::get('worldcup_use_mock', config('worldcup.use_mock', true)),
             'tournament_mode' => Cache::get('worldcup_tournament_mode', 'pre-tournament'),
             'cache_hit_rate' => $service->getCacheHitRate(),
             'last_api_call' => Cache::get('worldcup_last_api_call'),

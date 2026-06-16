@@ -38,7 +38,7 @@ class WorldCupSettings extends Page implements HasForms
     public function mount(): void
     {
         $this->form->fill([
-            'use_mock' => (bool) Cache::get('worldcup_use_mock', true),
+            'use_mock' => (bool) Cache::get('worldcup_use_mock', config('worldcup.use_mock', true)),
             'tournament_mode' => Cache::get('worldcup_tournament_mode', 'pre-tournament'),
         ]);
     }
@@ -68,7 +68,7 @@ class WorldCupSettings extends Page implements HasForms
                         Placeholder::make('tournament_mode_info')
                             ->label('Current Mode')
                             ->content(function () {
-                                $useMock = (bool) Cache::get('worldcup_use_mock', true);
+                                $useMock = (bool) Cache::get('worldcup_use_mock', config('worldcup.use_mock', true));
                                 $mode = Cache::get('worldcup_tournament_mode', 'pre-tournament');
                                 
                                 if ($useMock) {
@@ -81,7 +81,7 @@ class WorldCupSettings extends Page implements HasForms
                         Placeholder::make('mode_description')
                             ->label('What This Means')
                             ->content(function () {
-                                $useMock = (bool) Cache::get('worldcup_use_mock', true);
+                                $useMock = (bool) Cache::get('worldcup_use_mock', config('worldcup.use_mock', true));
                                 
                                 if ($useMock) {
                                     return 'Live scores endpoint returns mock data. Frontend should hide live scores widget from customers. Use for development/staging only.';
